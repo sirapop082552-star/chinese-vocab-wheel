@@ -164,6 +164,8 @@
   .btn-learned:hover { transform:translateY(-2px); }
   .btn-keep { background:rgba(255,255,255,.07); color:var(--muted); border:1px solid var(--card-border); }
   .btn-keep:hover { color:var(--text); border-color:rgba(255,255,255,.25); }
+  .btn-reveal { background:linear-gradient(135deg,#7dd3fc,#3b82f6); color:#06243f; box-shadow:0 10px 24px -10px rgba(59,130,246,.6); }
+  .btn-reveal:hover { transform:translateY(-2px); }
   .reveal-hint { color:#5c6488; font-size:.85rem; margin-bottom:18px; cursor:pointer; user-select:none; }
   .hidden-part { visibility:hidden; }
 
@@ -228,6 +230,7 @@
     <div class="py-big hidden-part" id="mPy"></div>
     <div class="th-big hidden-part" id="mTh"></div>
     <div class="btns">
+      <button class="btn-reveal" id="revealBtn">👁️ ดูเฉลย</button>
       <button class="btn-learned" id="learnedBtn">✅ จำได้แล้ว เอาออก</button>
       <button class="btn-keep" id="keepBtn">🔁 เก็บไว้หมุนต่อ</button>
     </div>
@@ -1138,12 +1141,14 @@ function showResult(segIdx) {
   document.getElementById("mPy").classList.add("hidden-part");
   document.getElementById("mTh").classList.add("hidden-part");
   document.getElementById("revealHint").style.display = "block";
+  document.getElementById("revealBtn").style.display = "";
   document.getElementById("modalBg").classList.add("show");
 }
 function reveal() {
   document.getElementById("mPy").classList.remove("hidden-part");
   document.getElementById("mTh").classList.remove("hidden-part");
   document.getElementById("revealHint").style.display = "none";
+  document.getElementById("revealBtn").style.display = "none";
 }
 function closeModal() {
   document.getElementById("modalBg").classList.remove("show");
@@ -1209,6 +1214,7 @@ document.getElementById("resetBtn").onclick = ()=>{
   }
 };
 document.getElementById("revealHint").onclick = reveal;
+document.getElementById("revealBtn").onclick = reveal;
 document.getElementById("mZh").onclick = reveal;
 document.getElementById("learnedBtn").onclick = ()=>{
   learned.add(VOCAB[resultVocabIdx][0]);
